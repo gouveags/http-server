@@ -30,7 +30,6 @@ const fileWriterHandler = async ({ query, body }) => {
 	}
 
 	try {
-		console.log({ requestedPath, body });
 		const fileContent = await ensureFileExistsSync(requestedPath, body);
 		return { status: HTTP_STATUS_CODES.CREATED };
 	} catch (err) {

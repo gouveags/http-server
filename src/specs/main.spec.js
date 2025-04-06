@@ -46,7 +46,7 @@ describe("HTTP Server Tests", () => {
 
 		if (fs.existsSync(dirDefPath)) {
 			await fsPromises.rm(dirDefPath, { recursive: true }, (err) => {
-				console.log(err);
+				console.error(err);
 				return;
 			});
 		}

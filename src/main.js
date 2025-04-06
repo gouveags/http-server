@@ -76,7 +76,7 @@ const server = net.createServer((socket) => {
 });
 
 server.listen(4221, "localhost", () => {
-	console.log("Server running at http://localhost:4221/");
+	console.info("Server running at http://localhost:4221/");
 });
 
 module.exports = server;
