@@ -1,3 +1,16 @@
+const fs = require("node:fs");
+const path = require("node:path");
+
+const ensureFileExistsSync = async (filePath, defaultContent = "") => {
+	const fileDefPath = path.resolve(__dirname, filePath);
+
+	if (fs.existsSync(fileDefPath)) return;
+
+	const dir = path.dirname(fileDefPath);
+	fs.mkdirSync(dir, { recursive: true });
+	fs.writeFileSync(fileDefPath, defaultContent);
+};
+
 const HttpError = (message, status) => ({
 	status,
 	message,
@@ -27,4 +40,10 @@ const createResponse = ({ responseStatus, responseBody = "" }) => {
 	return `HTTP/1.1 ${responseStatus}\r\n${responseHeader}\r\n${responseBody}`;
 };
 
-module.exports = { createResponse, findMatchingRoute, HttpError, byteSize };
+module.exports = {
+	byteSize,
+	HttpError,
+	createResponse,
+	findMatchingRoute,
+	ensureFileExistsSync,
+};
