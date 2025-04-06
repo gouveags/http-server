@@ -1,5 +1,5 @@
 const { HTTP_METHODS } = require("./constants");
-const { stringHandler, headerHandler } = require("./handlers");
+const { stringHandler, headerHandler } = require("./functions");
 
 module.exports = [
 	{

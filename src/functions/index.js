@@ -1,4 +1,5 @@
-const { HttpError } = require("./utils");
+const { HttpError } = require("../utils");
+const { HTTP_STATUS_CODES } = require("../constants");
 
 const stringHandler = ({ query }) => query;
 

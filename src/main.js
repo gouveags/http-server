@@ -1,12 +1,11 @@
 const net = require("node:net");
 const routes = require("./routes.js");
-const { HTTP_STATUS_CODES, HTTP_METHODS } = require("./constants.js");
-const { HttpError, findMatchingRoute, createResponse } = require("./utils.js");
-
-// You can use print statements as follows for debugging, they'll be visible when running tests.
-console.log("Logs from your program will appear here!");
+const { HTTP_STATUS_CODES, HTTP_METHODS } = require("./constants");
+const { HttpError, findMatchingRoute, createResponse } = require("./utils");
 
 const server = net.createServer((socket) => {
+	console.info("Server running on port 4221...");
+
 	const middleware = (fn) => async (data) => {
 		const { result, error } = await fn(data).catch((error) => ({ error }));
 
@@ -71,3 +70,5 @@ const server = net.createServer((socket) => {
 });
 
 server.listen(4221, "localhost");
+
+module.exports = server;
