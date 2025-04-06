@@ -4,14 +4,20 @@ const { HTTP_STATUS_CODES, HTTP_METHODS } = require("./constants");
 const { HttpError, findMatchingRoute, createResponse } = require("./utils");
 
 const server = net.createServer((socket) => {
-	console.info("Server running on port 4221...");
-
 	const middleware = (fn) => async (data) => {
 		const { result, error } = await fn(data).catch((error) => ({ error }));
 
 		const res = createResponse({
-			responseBody: error ? error.message : result,
-			responseStatus: error ? error.status : HTTP_STATUS_CODES.OK,
+			responseBody: error
+				? error.message
+				: result?.message
+					? result.message
+					: result,
+			responseStatus: error
+				? error.status
+				: result?.status
+					? result.status
+					: HTTP_STATUS_CODES.OK,
 		});
 
 		socket.write(res);
@@ -58,7 +64,7 @@ const server = net.createServer((socket) => {
 
 			return {
 				result: route.handler
-					? route.handler({ query: pathParam, headers, body })
+					? await route.handler({ query: pathParam, headers, body })
 					: route.handler,
 			};
 		}),
@@ -69,6 +75,8 @@ const server = net.createServer((socket) => {
 	});
 });
 
-server.listen(4221, "localhost");
+server.listen(4221, "localhost", () => {
+	console.log("Server running at http://localhost:4221/");
+});
 
 module.exports = server;
