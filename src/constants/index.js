@@ -12,6 +12,7 @@ const HTTP_METHODS = Object.freeze({
 
 const HTTP_STATUS_CODES = Object.freeze({
 	OK: "200 OK",
+	CREATED: "201 Created",
 	NOT_FOUND: "404 Not Found",
 	BAD_REQUEST: "400 Bad Request",
 	INTERNAL_SERVER_ERROR: "500 Internal Server Error",
