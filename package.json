@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
-		"test": "node --test '**/*.test.js' '**/*.spec.js'"
+		"test": "node --test --test-force-exit '**/*.test.js' '**/*.spec.js'"
 	},
 	"repository": {
 		"type": "git",
