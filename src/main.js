@@ -4,7 +4,7 @@ const { HTTP_STATUS_CODES, HTTP_METHODS } = require("./constants");
 const { HttpError, findMatchingRoute, createResponse } = require("./utils");
 
 const server = net.createServer((socket) => {
-	console.info("Server running on port: 4221...");
+	console.info("Server running on port 4221...");
 
 	const middleware = (fn) => async (data) => {
 		const { result, error } = await fn(data).catch((error) => ({ error }));
